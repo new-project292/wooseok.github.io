@@ -1,134 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Web Agency</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('background.jpg') no-repeat center center/cover;
-      color: white;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-    }
-
-    nav ul li {
-      position: relative;
-      padding-left: 15px;
-    }
-
-    nav ul li::before {
-      content: '•';
-      position: absolute;
-      left: 0;
-      color: white;
-    }
-
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 80vh;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      max-width: 700px;
-      margin-bottom: 30px;
-    }
-
-    .hero button {
-      background-color: white;
-      color: black;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s;
-    }
-
-    .hero button:hover {
-      background-color: #ddd;
-    }
-
-    .carousel-dots {
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-      gap: 10px;
-    }
-
-    .carousel-dots span {
-      display: inline-block;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esigned - Web Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::before {
+            content: "•";
+            position: absolute;
+            left: -15px;
+        }
+        
+        .icons {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #000 0%, #660000 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::after {
+            content: "5SI";
+            position: absolute;
+            font-size: 40vw;
+            opacity: 0.1;
+            right: -10%;
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .welcome-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .agency-title {
+            font-size: 80px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .hero-description {
+            max-width: 800px;
+            margin: 0 auto 50px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        
+        .contact-btn {
+            background-color: #fff;
+            color: #000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 50px;
+        }
+        
+        .dots {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        
+        .laptop-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20%;
+            background-color: #000;
+            opacity: 0.7;
+            clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="logo">Esigned</div>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>What we do</li>
-        <li>Portfolio</li>
-        <li>Contact us</li>
-        <li>👤</li>
-        <li>🔍</li>
-      </ul>
-    </nav>
-  </header>
-
-  <section class="hero">
-    <h2>WELCOME TO</h2>
-    <h1>WEB AGENCY</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
-    <button>Contact us</button>
-    <div class="carousel-dots">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </section>
+    <header>
+        <nav class="navbar">
+            <div class="logo">Esigned</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">What we do</a>
+                <a href="#">Portfolio</a>
+                <a href="#">Contact us</a>
+            </div>
+            <div class="icons">
+                <div class="user-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="search-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2 class="welcome-text">WELCOME TO</h2>
+                <h1 class="agency-title">WEB AGENCY</h1>
+                <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
+                <a href="#" class="contact-btn">Contact us</a>
+                <div class="dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+            </div>
+            <div class="laptop-overlay"></div>
+        </section>
+    </main>
 </body>
 </html>
