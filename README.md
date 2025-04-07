@@ -1,1 +1,0 @@
-# wooseok.github.io
