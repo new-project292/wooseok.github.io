@@ -1,18 +1,134 @@
-<!doctype html>
-<html lan='ko'>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>My first web site</title>
-<style>
-h2{font-weight:bolder; color:red;}
-</style>
-<script>
-alert('Hello World);
-</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Web Agency</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('background.jpg') no-repeat center center/cover;
+      color: white;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    nav ul li {
+      position: relative;
+      padding-left: 15px;
+    }
+
+    nav ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: white;
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 80vh;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .hero button {
+      background-color: white;
+      color: black;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .hero button:hover {
+      background-color: #ddd;
+    }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      gap: 10px;
+    }
+
+    .carousel-dots span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+  </style>
 </head>
 <body>
-<h2>Hello World</h2>
-<h3>처음 만드는 웹 페이지</h3>
-  <img src ="sample.png">
+  <header>
+    <div class="logo">Esigned</div>
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>What we do</li>
+        <li>Portfolio</li>
+        <li>Contact us</li>
+        <li>👤</li>
+        <li>🔍</li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>WELCOME TO</h2>
+    <h1>WEB AGENCY</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
+    <button>Contact us</button>
+    <div class="carousel-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
 </body>
 </html>
