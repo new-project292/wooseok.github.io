@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esigned - Web Agency</title>
+    <title>Esigned - 웹 에이전시</title>
     <style>
         * {
             margin: 0;
@@ -54,14 +54,35 @@
         .icons {
             display: flex;
             gap: 20px;
+            align-items: center;
+        }
+        
+        .search-container {
+            position: relative;
+            display: none;
+        }
+        
+        .search-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            outline: none;
+            width: 200px;
+        }
+        
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .search-icon:hover {
+            cursor: pointer;
         }
         
         .hero {
             background: linear-gradient(135deg, #000 0%, #660000 100%);
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             position: relative;
             overflow: hidden;
         }
@@ -73,6 +94,29 @@
             opacity: 0.1;
             right: -10%;
             pointer-events: none;
+        }
+        
+        .slider {
+            height: 100%;
+            position: relative;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
         }
         
         .hero-content {
@@ -113,12 +157,22 @@
             display: flex;
             gap: 10px;
             justify-content: center;
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            right: 0;
         }
         
         .dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .dot.active {
             background-color: #fff;
         }
         
@@ -138,20 +192,23 @@
         <nav class="navbar">
             <div class="logo">Esigned</div>
             <div class="nav-links">
-                <a href="#">Home</a>
-                <a href="#">About</a>
-                <a href="#">What we do</a>
-                <a href="#">Portfolio</a>
-                <a href="#">Contact us</a>
+                <a href="#">홈</a>
+                <a href="#">소개</a>
+                <a href="#">서비스</a>
+                <a href="#">포트폴리오</a>
+                <a href="#">문의하기</a>
             </div>
             <div class="icons">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
+                </div>
                 <div class="user-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </div>
-                <div class="search-icon">
+                <div class="search-icon" onclick="toggleSearch()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -163,19 +220,103 @@
     
     <main>
         <section class="hero">
-            <div class="hero-content">
-                <h2 class="welcome-text">WELCOME TO</h2>
-                <h1 class="agency-title">WEB AGENCY</h1>
-                <p class="hero-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore</p>
-                <a href="#" class="contact-btn">Contact us</a>
+            <div class="slider">
+                <div class="slide active">
+                    <div class="hero-content">
+                        <h2 class="welcome-text">환영합니다</h2>
+                        <h1 class="agency-title">웹 에이전시</h1>
+                        <p class="hero-description">최고의 웹 솔루션을 제공하는 에이전시입니다. 혁신적인 디자인과 최신 기술로 비즈니스 성장을 돕겠습니다.</p>
+                        <a href="#" class="contact-btn">문의하기</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="hero-content">
+                        <h2 class="welcome-text">전문성</h2>
+                        <h1 class="agency-title">웹 디자인</h1>
+                        <p class="hero-description">사용자 경험을 최우선으로 생각하는 웹 디자인으로 방문자의 체류 시간과 전환율을 높여드립니다.</p>
+                        <a href="#" class="contact-btn">포트폴리오 보기</a>
+                    </div>
+                </div>
+                <div class="slide">
+                    <div class="hero-content">
+                        <h2 class="welcome-text">기술력</h2>
+                        <h1 class="agency-title">개발 서비스</h1>
+                        <p class="hero-description">최신 웹 기술과 프레임워크를 활용하여 안정적이고 확장 가능한 웹 솔루션을 제공합니다.</p>
+                        <a href="#" class="contact-btn">서비스 알아보기</a>
+                    </div>
+                </div>
                 <div class="dots">
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
+                    <div class="dot active" onclick="setSlide(0)"></div>
+                    <div class="dot" onclick="setSlide(1)"></div>
+                    <div class="dot" onclick="setSlide(2)"></div>
                 </div>
             </div>
             <div class="laptop-overlay"></div>
         </section>
     </main>
+
+    <script>
+        // 검색 기능 토글
+        function toggleSearch() {
+            const searchContainer = document.querySelector('.search-container');
+            const searchInput = document.querySelector('.search-input');
+            
+            if (searchContainer.style.display === 'block') {
+                searchContainer.style.display = 'none';
+            } else {
+                searchContainer.style.display = 'block';
+                searchInput.focus();
+            }
+        }
+
+        // 슬라이드 기능
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        // 슬라이드 설정 함수
+        function setSlide(slideIndex) {
+            if (slideIndex >= totalSlides) {
+                currentSlide = 0;
+            } else if (slideIndex < 0) {
+                currentSlide = totalSlides - 1;
+            } else {
+                currentSlide = slideIndex;
+            }
+
+            // 모든 슬라이드 비활성화
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // 모든 도트 비활성화
+            dots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // 현재 슬라이드와 도트 활성화
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // 자동 슬라이드 기능
+        let slideInterval = setInterval(() => {
+            setSlide(currentSlide + 1);
+        }, 5000);
+
+        // 슬라이드에 마우스 올리면 자동 슬라이드 멈춤
+        const slider = document.querySelector('.slider');
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        // 슬라이드에서 마우스 떠나면 자동 슬라이드 다시 시작
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(() => {
+                setSlide(currentSlide + 1);
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
