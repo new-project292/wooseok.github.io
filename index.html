@@ -1,322 +1,1101 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esigned - 웹 에이전시</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-        
-        body {
-            background-color: #000;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 40px;
-            position: absolute;
-            width: 100%;
-            z-index: 10;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            color: #fff;
-            text-decoration: none;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        .nav-links a::before {
-            content: "•";
-            position: absolute;
-            left: -15px;
-        }
-        
-        .icons {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .search-container {
-            position: relative;
-            display: none;
-        }
-        
-        .search-input {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 20px;
-            outline: none;
-            width: 200px;
-        }
-        
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .search-icon:hover {
-            cursor: pointer;
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, #000 0%, #660000 100%);
-            height: 100vh;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::after {
-            content: "5SI";
-            position: absolute;
-            font-size: 40vw;
-            opacity: 0.1;
-            right: -10%;
-            pointer-events: none;
-        }
-        
-        .slider {
-            height: 100%;
-            position: relative;
-        }
-        
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        
-        .slide.active {
-            opacity: 1;
-        }
-        
-        .hero-content {
-            text-align: center;
-            z-index: 1;
-        }
-        
-        .welcome-text {
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-        
-        .agency-title {
-            font-size: 80px;
-            font-weight: bold;
-            margin-bottom: 30px;
-        }
-        
-        .hero-description {
-            max-width: 800px;
-            margin: 0 auto 50px;
-            font-size: 18px;
-            line-height: 1.6;
-        }
-        
-        .contact-btn {
-            background-color: #fff;
-            color: #000;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 50px;
-        }
-        
-        .dots {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            position: absolute;
-            bottom: 50px;
-            left: 0;
-            right: 0;
-        }
-        
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .dot.active {
-            background-color: #fff;
-        }
-        
-        .laptop-overlay {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 20%;
-            background-color: #000;
-            opacity: 0.7;
-            clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 프로그래머 포트폴리오 | Esigned</title>
+  <style>
+      * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+          font-family: 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+      }
+      
+      :root {
+          --primary-color: #7933ff;
+          --secondary-color: #ff338f;
+          --dark-color: #0a0a14;
+          --light-color: #ffffff;
+          --gray-color: #f0f0f0;
+      }
+      
+      body {
+          background-color: var(--dark-color);
+          color: var(--light-color);
+          overflow-x: hidden;
+      }
+      
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+      }
+      
+      /* 네비게이션 바 */
+      .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 40px;
+          position: fixed;
+          width: 100%;
+          z-index: 100;
+          transition: background-color 0.3s ease;
+      }
+      
+      .navbar.scrolled {
+          background-color: rgba(10, 10, 20, 0.95);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      
+      .logo {
+          font-size: 24px;
+          font-weight: bold;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+      }
+      
+      .nav-links {
+          display: flex;
+          gap: 30px;
+      }
+      
+      .nav-links a {
+          color: var(--light-color);
+          text-decoration: none;
+          position: relative;
+          padding: 5px 0;
+          font-size: 16px;
+          transition: color 0.3s ease;
+      }
+      
+      .nav-links a::before {
+          content: "•";
+          position: absolute;
+          left: -15px;
+          color: var(--primary-color);
+      }
+      
+      .nav-links a:hover {
+          color: var(--primary-color);
+      }
+      
+      .icons {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+      }
+      
+      .search-container {
+          position: relative;
+          display: none;
+      }
+      
+      .search-input {
+          background-color: rgba(255, 255, 255, 0.1);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+          color: white;
+          padding: 8px 15px;
+          border-radius: 20px;
+          outline: none;
+          width: 200px;
+      }
+      
+      .search-input::placeholder {
+          color: rgba(255, 255, 255, 0.5);
+      }
+      
+      .icon {
+          cursor: pointer;
+          transition: transform 0.3s ease;
+      }
+      
+      .icon:hover {
+          transform: scale(1.1);
+          color: var(--primary-color);
+      }
+      
+      /* 히어로 섹션 */
+      .hero {
+          background: linear-gradient(135deg, var(--dark-color) 0%, #1a1a2e 100%);
+          height: 100vh;
+          position: relative;
+          overflow: hidden;
+      }
+      
+      .hero::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: 
+              radial-gradient(circle at 10% 20%, rgba(121, 51, 255, 0.1) 0%, transparent 20%),
+              radial-gradient(circle at 90% 80%, rgba(255, 51, 143, 0.1) 0%, transparent 20%);
+          pointer-events: none;
+      }
+      
+      .slider {
+          height: 100%;
+          position: relative;
+      }
+      
+      .slide {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          transition: opacity 0.8s ease-in-out;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      
+      .slide.active {
+          opacity: 1;
+      }
+      
+      .hero-content {
+          text-align: center;
+          z-index: 1;
+          padding: 0 20px;
+          max-width: 900px;
+      }
+      
+      .welcome-text {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: var(--primary-color);
+          letter-spacing: 3px;
+          text-transform: uppercase;
+      }
+      
+      .agency-title {
+          font-size: 60px;
+          font-weight: bold;
+          margin-bottom: 30px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          line-height: 1.2;
+      }
+      
+      .hero-description {
+          max-width: 800px;
+          margin: 0 auto 50px;
+          font-size: 18px;
+          line-height: 1.6;
+          color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .contact-btn {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: var(--light-color);
+          padding: 15px 40px;
+          border-radius: 50px;
+          text-decoration: none;
+          font-weight: bold;
+          display: inline-block;
+          margin-bottom: 50px;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .contact-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(121, 51, 255, 0.3);
+      }
+      
+      .dots {
+          display: flex;
+          gap: 10px;
+          justify-content: center;
+          position: absolute;
+          bottom: 50px;
+          left: 0;
+          right: 0;
+      }
+      
+      .dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.3);
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      
+      .dot.active {
+          background-color: var(--primary-color);
+          transform: scale(1.2);
+      }
+      
+      .dot:hover {
+          background-color: rgba(255, 255, 255, 0.6);
+      }
+      
+      .slider-arrows {
+          position: absolute;
+          width: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+          display: flex;
+          justify-content: space-between;
+          padding: 0 30px;
+          z-index: 5;
+      }
+      
+      .arrow {
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s ease;
+      }
+      
+      .arrow:hover {
+          background-color: var(--primary-color);
+          transform: scale(1.1);
+      }
+      
+      /* 프로필 섹션 */
+      .profile-section {
+          padding: 100px 0;
+          background-color: var(--dark-color);
+      }
+      
+      .section-title {
+          text-align: center;
+          margin-bottom: 60px;
+          font-size: 36px;
+          position: relative;
+      }
+      
+      .section-title::after {
+          content: "";
+          position: absolute;
+          bottom: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80px;
+          height: 4px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      }
+      
+      .profile-content {
+          display: flex;
+          align-items: center;
+          gap: 50px;
+          flex-wrap: wrap;
+      }
+      
+      .profile-image {
+          flex: 1;
+          min-width: 300px;
+          text-align: center;
+      }
+      
+      .profile-image img {
+          width: 300px;
+          height: 300px;
+          border-radius: 20px;
+          object-fit: cover;
+          box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+          border: 4px solid rgba(121, 51, 255, 0.3);
+      }
+      
+      .profile-text {
+          flex: 2;
+          min-width: 300px;
+      }
+      
+      .profile-text h3 {
+          font-size: 28px;
+          margin-bottom: 20px;
+          color: var(--primary-color);
+      }
+      
+      .profile-text p {
+          margin-bottom: 20px;
+          line-height: 1.7;
+          color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .skills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-top: 30px;
+      }
+      
+      .skill {
+          background-color: rgba(121, 51, 255, 0.2);
+          border: 1px solid var(--primary-color);
+          padding: 8px 16px;
+          border-radius: 20px;
+          font-size: 14px;
+          transition: all 0.3s ease;
+      }
+      
+      .skill:hover {
+          background-color: var(--primary-color);
+          transform: translateY(-3px);
+      }
+      
+      /* 프로젝트 섹션 */
+      .projects-section {
+          padding: 100px 0;
+          background-color: #0d0d17;
+      }
+      
+      .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 30px;
+      }
+      
+      .project-card {
+          background-color: rgba(255, 255, 255, 0.05);
+          border-radius: 15px;
+          overflow: hidden;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .project-card:hover {
+          transform: translateY(-10px);
+          box-shadow: 0 15px 30px rgba(121, 51, 255, 0.2);
+      }
+      
+      .project-image {
+          width: 100%;
+          height: 200px;
+          object-fit: cover;
+      }
+      
+      .project-content {
+          padding: 20px;
+      }
+      
+      .project-content h3 {
+          margin-bottom: 15px;
+          font-size: 22px;
+          color: var(--light-color);
+      }
+      
+      .project-content p {
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 20px;
+          font-size: 15px;
+          line-height: 1.6;
+      }
+      
+      .project-technologies {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 20px;
+      }
+      
+      .project-tech {
+          background-color: rgba(255, 255, 255, 0.1);
+          padding: 5px 10px;
+          border-radius: 5px;
+          font-size: 12px;
+      }
+      
+      .project-links {
+          display: flex;
+          gap: 15px;
+      }
+      
+      .project-link {
+          color: var(--primary-color);
+          text-decoration: none;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 14px;
+          transition: color 0.3s ease;
+      }
+      
+      .project-link:hover {
+          color: var(--secondary-color);
+      }
+      
+      /* 기술 스택 섹션 */
+      .tech-section {
+          padding: 100px 0;
+          background-color: var(--dark-color);
+      }
+      
+      .tech-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 30px;
+          margin-top: 50px;
+      }
+      
+      .tech-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          padding: 20px;
+          background-color: rgba(255, 255, 255, 0.05);
+          border-radius: 15px;
+          transition: transform 0.3s ease;
+      }
+      
+      .tech-item:hover {
+          transform: translateY(-10px);
+          background-color: rgba(121, 51, 255, 0.1);
+      }
+      
+      .tech-icon {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 15px;
+      }
+      
+      .tech-name {
+          font-weight: bold;
+          margin-bottom: 10px;
+      }
+      
+      .tech-level {
+          width: 100%;
+          height: 5px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+          overflow: hidden;
+      }
+      
+      .tech-level-fill {
+          height: 100%;
+          background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      }
+      
+      /* 연락처 섹션 */
+      .contact-section {
+          padding: 100px 0;
+          background-color: #0d0d17;
+      }
+      
+      .contact-content {
+          display: flex;
+          gap: 50px;
+          flex-wrap: wrap;
+      }
+      
+      .contact-form {
+          flex: 1;
+          min-width: 300px;
+      }
+      
+      .form-group {
+          margin-bottom: 20px;
+      }
+      
+      .form-control {
+          width: 100%;
+          padding: 15px;
+          background-color: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+          color: var(--light-color);
+          font-size: 16px;
+          transition: border-color 0.3s ease;
+      }
+      
+      .form-control:focus {
+          outline: none;
+          border-color: var(--primary-color);
+      }
+      
+      textarea.form-control {
+          min-height: 150px;
+          resize: vertical;
+      }
+      
+      .submit-btn {
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          color: var(--light-color);
+          padding: 15px 30px;
+          border: none;
+          border-radius: 8px;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .submit-btn:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 10px 20px rgba(121, 51, 255, 0.3);
+      }
+      
+      .contact-info {
+          flex: 1;
+          min-width: 300px;
+      }
+      
+      .contact-item {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 25px;
+      }
+      
+      .contact-icon {
+          width: 50px;
+          height: 50px;
+          background-color: rgba(121, 51, 255, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      
+      .contact-text h4 {
+          margin-bottom: 5px;
+          font-size: 18px;
+          color: var(--primary-color);
+      }
+      
+      .contact-text p {
+          color: rgba(255, 255, 255, 0.8);
+      }
+      
+      .social-links {
+          display: flex;
+          gap: 15px;
+          margin-top: 30px;
+      }
+      
+      .social-link {
+          width: 40px;
+          height: 40px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+      }
+      
+      .social-link:hover {
+          background-color: var(--primary-color);
+          transform: translateY(-3px);
+      }
+      
+      /* 푸터 */
+      footer {
+          background-color: #070711;
+          padding: 30px 0;
+          text-align: center;
+      }
+      
+      .footer-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      
+      .footer-logo {
+          font-size: 24px;
+          font-weight: bold;
+          margin-bottom: 20px;
+          background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+      }
+      
+      .footer-links {
+          display: flex;
+          gap: 20px;
+          margin-bottom: 20px;
+      }
+      
+      .footer-links a {
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+          transition: color 0.3s ease;
+      }
+      
+      .footer-links a:hover {
+          color: var(--primary-color);
+      }
+      
+      .footer-social {
+          display: flex;
+          gap: 15px;
+          margin-bottom: 20px;
+      }
+      
+      .footer-social a {
+          width: 35px;
+          height: 35px;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.3s ease;
+      }
+      
+      .footer-social a:hover {
+          background-color: var(--primary-color);
+      }
+      
+      .copyright {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 14px;
+      }
+      
+      /* 반응형 디자인 */
+      @media (max-width: 768px) {
+          .navbar {
+              padding: 15px 20px;
+          }
+          
+          .nav-links {
+              display: none;
+          }
+          
+          .agency-title {
+              font-size: 40px;
+          }
+          
+          .profile-content {
+              flex-direction: column;
+              text-align: center;
+          }
+          
+          .profile-text {
+              text-align: left;
+          }
+          
+          .projects-grid {
+              grid-template-columns: 1fr;
+          }
+          
+          .contact-content {
+              flex-direction: column;
+          }
+          
+          .slider-arrows {
+              padding: 0 15px;
+          }
+          
+          .arrow {
+              width: 40px;
+              height: 40px;
+          }
+      }
+      
+      .laptop-overlay {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 20%;
+          background-color: rgba(10, 10, 20, 0.7);
+          clip-path: polygon(0 60%, 100% 0, 100% 100%, 0 100%);
+      }
+  </style>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">Esigned</div>
-            <div class="nav-links">
-                <a href="#">홈</a>
-                <a href="#">소개</a>
-                <a href="#">서비스</a>
-                <a href="#">포트폴리오</a>
-                <a href="#">문의하기</a>
-            </div>
-            <div class="icons">
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
-                </div>
-                <div class="user-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                </div>
-                <div class="search-icon" onclick="toggleSearch()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </div>
-            </div>
-        </nav>
-    </header>
-    
-    <main>
-        <section class="hero">
-            <div class="slider">
-                <div class="slide active">
-                    <div class="hero-content">
-                        <h2 class="welcome-text">환영합니다</h2>
-                        <h1 class="agency-title">웹 에이전시</h1>
-                        <p class="hero-description">최고의 웹 솔루션을 제공하는 에이전시입니다. 혁신적인 디자인과 최신 기술로 비즈니스 성장을 돕겠습니다.</p>
-                        <a href="#" class="contact-btn">문의하기</a>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="hero-content">
-                        <h2 class="welcome-text">전문성</h2>
-                        <h1 class="agency-title">웹 디자인</h1>
-                        <p class="hero-description">사용자 경험을 최우선으로 생각하는 웹 디자인으로 방문자의 체류 시간과 전환율을 높여드립니다.</p>
-                        <a href="#" class="contact-btn">포트폴리오 보기</a>
-                    </div>
-                </div>
-                <div class="slide">
-                    <div class="hero-content">
-                        <h2 class="welcome-text">기술력</h2>
-                        <h1 class="agency-title">개발 서비스</h1>
-                        <p class="hero-description">최신 웹 기술과 프레임워크를 활용하여 안정적이고 확장 가능한 웹 솔루션을 제공합니다.</p>
-                        <a href="#" class="contact-btn">서비스 알아보기</a>
-                    </div>
-                </div>
-                <div class="dots">
-                    <div class="dot active" onclick="setSlide(0)"></div>
-                    <div class="dot" onclick="setSlide(1)"></div>
-                    <div class="dot" onclick="setSlide(2)"></div>
-                </div>
-            </div>
-            <div class="laptop-overlay"></div>
-        </section>
-    </main>
+  <header>
+      <nav class="navbar">
+          <div class="logo">Esigned</div>
+          <div class="nav-links">
+              <a href="#home">홈</a>
+              <a href="#profile">소개</a>
+              <a href="#projects">프로젝트</a>
+              <a href="#tech">기술 스택</a>
+              <a href="#contact">연락처</a>
+          </div>
+          <div class="icons">
+              <div class="search-container">
+                  <input type="text" class="search-input" placeholder="검색어를 입력하세요...">
+              </div>
+              <div class="icon user-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                  </svg>
+              </div>
+              <div class="icon search-icon" onclick="toggleSearch()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+              </div>
+          </div>
+      </nav>
+  </header>
+  
+  <main>
+      <section class="hero" id="home">
+          <div class="slider">
+              <div class="slide active">
+                  <div class="hero-content">
+                      <h2 class="welcome-text">안녕하세요</h2>
+                      <h1 class="agency-title">AI 프로그래머<br>김인공입니다</h1>
+                      <p class="hero-description">머신러닝, 딥러닝, 자연어 처리를 활용한 AI 솔루션 개발 전문가입니다. 혁신적인 AI 기술로 문제를 해결하는 것을 즐깁니다.</p>
+                      <a href="#contact" class="contact-btn">연락하기</a>
+                  </div>
+              </div>
+              <div class="slide">
+                  <div class="hero-content">
+                      <h2 class="welcome-text">전문 분야</h2>
+                      <h1 class="agency-title">AI 모델 개발 및<br>데이터 분석</h1>
+                      <p class="hero-description">효율적인 AI 모델 설계부터 데이터 전처리, 학습, 평가까지 AI 파이프라인 전체를 다루는 경험이 있습니다. 복잡한 데이터에서 가치를 발견합니다.</p>
+                      <a href="#projects" class="contact-btn">프로젝트 보기</a>
+                  </div>
+              </div>
+              <div class="slide">
+                  <div class="hero-content">
+                      <h2 class="welcome-text">기술 스택</h2>
+                      <h1 class="agency-title">최신 AI 기술<br>역량 보유</h1>
+                      <p class="hero-description">TensorFlow, PyTorch, scikit-learn 등 다양한 AI 프레임워크를 활용하며, Python, SQL, AWS 클라우드 환경에서의 개발 경험이 풍부합니다.</p>
+                      <a href="#tech" class="contact-btn">기술 스택 보기</a>
+                  </div>
+              </div>
+              <div class="slider-arrows">
+                  <div class="arrow left-arrow" onclick="setSlide(currentSlide - 1)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M15 18l-6-6 6-6"/>
+                      </svg>
+                  </div>
+                  <div class="arrow right-arrow" onclick="setSlide(currentSlide + 1)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M9 18l6-6-6-6"/>
+                      </svg>
+                  </div>
+              </div>
+              <div class="dots">
+                  <div class="dot active" onclick="setSlide(0)"></div>
+                  <div class="dot" onclick="setSlide(1)"></div>
+                  <div class="dot" onclick="setSlide(2)"></div>
+              </div>
+          </div>
+          <div class="laptop-overlay"></div>
+      </section>
 
-    <script>
-        // 검색 기능 토글
-        function toggleSearch() {
-            const searchContainer = document.querySelector('.search-container');
-            const searchInput = document.querySelector('.search-input');
-            
-            if (searchContainer.style.display === 'block') {
-                searchContainer.style.display = 'none';
-            } else {
-                searchContainer.style.display = 'block';
-                searchInput.focus();
-            }
-        }
+      <section class="profile-section" id="profile">
+          <div class="container">
+              <h2 class="section-title">소개</h2>
+              <div class="profile-content">
+                  <div class="profile-image">
+                      <img src="/api/placeholder/300/300" alt="AI 프로그래머 프로필 이미지">
+                  </div>
+                  <div class="profile-text">
+                      <h3>김인공 | AI 프로그래머</h3>
+                      <p>안녕하세요, 인공지능과 데이터 사이언스에 열정을 가진 AI 프로그래머입니다. 서울대학교 컴퓨터공학과를 졸업하고, 5년간 다양한 AI 프로젝트를 수행해왔습니다.</p>
+                      <p>데이터에서 통찰력을 발견하고, 이를 바탕으로 혁신적인 AI 솔루션을 개발하는 것이 제 목표입니다. 특히 자연어 처리(NLP)와 컴퓨터 비전 분야에 전문성을 가지고 있으며, 최신 딥러닝 기술을 활용한 솔루션 개발에 중점을 두고 있습니다.</p>
+                      <p>AI 기술을 통해 실생활의 문제를 해결하고, 사용자에게 의미 있는 가치를 제공하는 서비스를 만들고자 합니다. 끊임없이 새로운 기술을 학습하고, 도전적인 문제 해결에 열정을 갖고 있습니다.</p>
+                      <div class="skills">
+                          <div class="skill">파이썬</div>
+                          <div class="skill">TensorFlow</div>
+                          <div class="skill">PyTorch</div>
+                          <div class="skill">자연어 처리</div>
+                          <div class="skill">컴퓨터 비전</div>
+                          <div class="skill">머신러닝</div>
+                          <div class="skill">딥러닝</div>
+                          <div class="skill">데이터 분석</div>
+                          <div class="skill">클라우드 컴퓨팅</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
 
-        // 슬라이드 기능
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const totalSlides = slides.length;
+      <section class="projects-section" id="projects">
+          <div class="container">
+              <h2 class="section-title">프로젝트</h2>
+              <div class="projects-grid">
+                  <div class="project-card">
+                      <img src="/api/placeholder/400/200" alt="감정 분석 AI 프로젝트" class="project-image">
+                      <div class="project-content">
+                          <h3>텍스트 감정 분석 AI</h3>
+                          <p>문장의 감정을 분석하여 긍정/부정/중립으로 분류하는 딥러닝 기반 모델. 한국어 특화 자연어 처리 기술을 적용했습니다.</p>
+                          <div class="project-technologies">
+                              <span class="project-tech">Python</span>
+                              <span class="project-tech">PyTorch</span>
+                              <span class="project-tech">BERT</span>
+                              <span class="project-tech">Flask</span>
+                          </div>
+                          <div class="project-links">
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                  </svg>
+                                  깃허브 
+                              </a>
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                      <polyline points="15 3 21 3 21 9"></polyline>
+                                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                                  </svg>
+                                  데모
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="project-card">
+                      <img src="/api/placeholder/400/200" alt="이미지 인식 AI 프로젝트" class="project-image">
+                      <div class="project-content">
+                          <h3>객체 인식 시스템</h3>
+                          <p>실시간으로 이미지 내 객체를 인식하고 분류하는 시스템. 모바일 환경에서도 효율적으로 작동하도록 최적화되었습니다.</p>
+                          <div class="project-technologies">
+                              <span class="project-tech">Python</span>
+                              <span class="project-tech">TensorFlow</span>
+                              <span class="project-tech">YOLO</span>
+                              <span class="project-tech">OpenCV</span>
+                          </div>
+                          <div class="project-links">
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                  </svg>
+                                  깃허브
+                              </a>
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                      <polyline points="15 3 21 3 21 9"></polyline>
+                                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                                  </svg>
+                                  데모
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="project-card">
+                      <img src="/api/placeholder/400/200" alt="추천 시스템 AI 프로젝트" class="project-image">
+                      <div class="project-content">
+                          <h3>개인화 추천 시스템</h3>
+                          <p>사용자 행동 데이터를 기반으로 상품을 추천하는 AI 시스템. 협업 필터링과 컨텐츠 기반 필터링을 결합한 하이브리드 접근법을 사용했습니다.</p>
+                          <div class="project-technologies">
+                              <span class="project-tech">Python</span>
+                              <span class="project-tech">Scikit-learn</span>
+                              <span class="project-tech">Keras</span>
+                              <span class="project-tech">Flask</span>
+                          </div>
+                          <div class="project-links">
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                  </svg>
+                                  깃허브
+                              </a>
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                      <polyline points="15 3 21 3 21 9"></polyline>
+                                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                                  </svg>
+                                  데모
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="project-card">
+                      <img src="/api/placeholder/400/200" alt="챗봇 AI 프로젝트" class="project-image">
+                      <div class="project-content">
+                          <h3>지능형 고객 상담 챗봇</h3>
+                          <p>자연어 처리 기술을 활용한 고객 상담 챗봇으로, 문의 유형을 분류하고 적절한 답변을 제공합니다. 지속적인 학습 기능을 통해 시간이 지날수록 더 정확해집니다.</p>
+                          <div class="project-technologies">
+                              <span class="project-tech">Python</span>
+                              <span class="project-tech">BERT</span>
+                              <span class="project-tech">FastAPI</span>
+                              <span class="project-tech">Redis</span>
+                          </div>
+                          <div class="project-links">
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                  </svg>
+                                  깃허브
+                              </a>
+                              <a href="#" class="project-link">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                      <polyline points="15 3 21 3 21 9"></polyline>
+                                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                                  </svg>
+                                  데모
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
 
-        // 슬라이드 설정 함수
-        function setSlide(slideIndex) {
-            if (slideIndex >= totalSlides) {
-                currentSlide = 0;
-            } else if (slideIndex < 0) {
-                currentSlide = totalSlides - 1;
-            } else {
-                currentSlide = slideIndex;
-            }
+      <section class="contact-section" id="contact">
+          <div class="container">
+              <h2 class="section-title">연락처</h2>
+              <div class="contact-content">
+                  <div class="contact-form">
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder="성함">
+                      </div>
+                      <div class="form-group">
+                          <input type="email" class="form-control" placeholder="이메일">
+                      </div>
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder="제목">
+                      </div>
+                      <div class="form-group">
+                          <textarea class="form-control" placeholder="메시지"></textarea>
+                      </div>
+                      <button type="submit" class="submit-btn">메시지 보내기</button>
+                  </div>
+                  <div class="contact-info">
+                      <div class="contact-item">
+                          <div class="contact-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                              </svg>
+                          </div>
+                          <div class="contact-text">
+                              <h4>전화번호</h4>
+                              <p>010-1234-5678</p>
+                          </div>
+                      </div>
+                      <div class="contact-item">
+                          <div class="contact-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                  <polyline points="22,6 12,13 2,6"></polyline>
+                              </svg>
+                          </div>
+                          <div class="contact-text">
+                              <h4>이메일</h4>
+                              <p>contact@aiprogrammer.kr</p>
+                          </div>
+                      </div>
+                      <div class="contact-item">
+                          <div class="contact-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                  <circle cx="12" cy="10" r="3"></circle>
+                              </svg>
+                          </div>
+                          <div class="contact-text">
+                              <h4>주소</h4>
+                              <p>서울특별시 강남구 테헤란로 123</p>
+                          </div>
+                      </div>
+                      <div class="social-links">
+                          <a href="#" class="social-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                              </svg>
+                          </a>
+                          <a href="#" class="social-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M9 19c-5 1.5-5-2.5-7-3"></path>
+                                  <circle cx="12" cy="12" r="10"></circle>
+                              </svg>
+                          </a>
+                          <a href="#" class="social-link">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                              </svg>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  </main>
 
-            // 모든 슬라이드 비활성화
-            slides.forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            // 모든 도트 비활성화
-            dots.forEach(dot => {
-                dot.classList.remove('active');
-            });
-            
-            // 현재 슬라이드와 도트 활성화
-            slides[currentSlide].classList.add('active');
-            dots[currentSlide].classList.add('active');
-        }
+  <!-- 푸터 영역 -->
+  <footer>
+      <div class="footer-content">
+          <div class="footer-logo">Esigned</div>
+          <div class="footer-links">
+              <a href="#home">홈</a>
+              <a href="#profile">소개</a>
+              <a href="#projects">프로젝트</a>
+              <a href="#tech">기술 스택</a>
+              <a href="#contact">연락처</a>
+          </div>
+          <div class="footer-social">
+              <a href="#" class="social-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  </svg>
+              </a>
+              <a href="#" class="social-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3"></path>
+                      <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+              </a>
+              <a href="#" class="social-link">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                  </svg>
+              </a>
+          </div>
+          <div class="copyright">
+              &copy; 2025 Esigned. All Rights Reserved.
+          </div>
+      </div>
+  </footer>
 
-        // 자동 슬라이드 기능
-        let slideInterval = setInterval(() => {
-            setSlide(currentSlide + 1);
-        }, 5000);
+  <!-- 스크립트 영역 -->
+  <script>
+      // 검색 창 토글
+      function toggleSearch(){
+          const searchContainer = document.querySelector('.search-container');
+          if(getComputedStyle(searchContainer).display === 'none'){
+              searchContainer.style.display = 'block';
+          } else {
+              searchContainer.style.display = 'none';
+          }
+      }
 
-        // 슬라이드에 마우스 올리면 자동 슬라이드 멈춤
-        const slider = document.querySelector('.slider');
-        slider.addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
-        });
+      // 슬라이더 기능
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
 
-        // 슬라이드에서 마우스 떠나면 자동 슬라이드 다시 시작
-        slider.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(() => {
-                setSlide(currentSlide + 1);
-            }, 5000);
-        });
-    </script>
+      function setSlide(index) {
+          if (index < 0) {
+              currentSlide = slides.length - 1;
+          } else if (index >= slides.length) {
+              currentSlide = 0;
+          } else {
+              currentSlide = index;
+          }
+          slides.forEach((slide, idx) => {
+              slide.classList.toggle('active', idx === currentSlide);
+          });
+          dots.forEach((dot, idx) => {
+              dot.classList.toggle('active', idx === currentSlide);
+          });
+      }
+
+      // 자동 슬라이드 전환 (5초마다)
+      setInterval(() => {
+          setSlide(currentSlide + 1);
+      }, 5000);
+  </script>
 </body>
 </html>
