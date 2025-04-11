@@ -1,18 +1,22 @@
 [
     {
         "id": "smith",
-        "phone": "010-1234-1111"
+        "phone": "010-1234-1111",
+        "language": "Python"
     },
     {
         "id": "user2",
-        "phone": "010-5678-2222"
+        "phone": "010-5678-2222",
+        "language": "JavaScript"
     },
     {
         "id": "user3",
-        "phone": "010-9876-3333"
+        "phone": "010-9876-3333",
+        "language": "Java"
     },
     {
-        "id": "smith",
-        "phone": "010-9876-3333"
+        "id": "user4",
+        "phone": "010-9876-4444",
+        "language": "C++"
     }
 ]
