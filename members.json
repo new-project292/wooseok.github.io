@@ -18,5 +18,8 @@
         "id": "user4",
         "phone": "010-9876-4444",
         "language": "C++"
+    },
+    {
+        "languages": ["Python", "JavaScript", "Java", "C++"]
     }
 ]
