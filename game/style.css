@@ -1,0 +1,421 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+}
+
+.game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    border: 4px solid #6a0dad;
+    box-shadow: 0 0 20px rgba(106, 13, 173, 0.7);
+    overflow: hidden;
+}
+
+.screen {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+    color: #ff5555;
+    text-shadow: 0 0 10px rgba(255, 85, 85, 0.8);
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ffcc00;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 20px;
+    background-color: #6a0dad;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: #8a2be2;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #444;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.instructions {
+    margin-top: 30px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.instructions p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+}
+
+.hud {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px black;
+}
+
+.score, .time, .level {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.health-bar {
+    width: 100%;
+    height: 15px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+#health-fill {
+    height: 100%;
+    width: 100%;
+    background-color: #ff5555;
+    border-radius: 5px;
+    transition: width 0.3s;
+}
+
+.exp-bar {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-top: 3px;
+}
+
+#exp-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(to right, #00aaff, #00ffff);
+    border-radius: 5px;
+    transition: width 0.3s;
+    box-shadow: 0 0 5px #00aaff;
+}
+
+.final-score {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* 레벨업 스크린 스타일 */
+#level-up-screen {
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+.skill-points {
+    font-size: 24px;
+    margin: 10px 0 20px;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.skill-selection {
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.skill-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+    padding: 10px;
+}
+
+.skill-button {
+    width: 200px;
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #6a0dad;
+    border: 2px solid #8a2be2;
+    border-radius: 10px;
+    transition: all 0.3s;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+}
+
+.skill-button:hover {
+    background-color: #8a2be2;
+    border-color: #a64dff;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+.skill-button:disabled {
+    background-color: #444;
+    border-color: #666;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.7;
+}
+
+.skill-button .emoji {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.skill-button .name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.skill-button .level {
+    font-size: 16px;
+    color: #ffcc00;
+}
+
+.skill-button .effect {
+    font-size: 14px;
+    color: #aaa;
+}
+
+.skill-description {
+    font-size: 18px;
+    margin-top: 10px;
+    color: #ccc;
+}
+
+/* 푸터 스타일 */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    z-index: 1000;
+    font-size: 14px;
+    height: 50px;
+    box-sizing: border-box;
+}
+
+footer p {
+    margin: 0 0 5px 0;
+}
+
+footer nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+footer button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 0;
+}
+
+footer button:hover {
+    color: #ff5555;
+}
+
+/* 페이지 스타일 */
+.page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    margin-bottom: 100px;
+}
+
+.page h1 {
+    color: #ff5555;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.page h2 {
+    color: #ff9955;
+    margin-top: 30px;
+}
+
+.page p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.page ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.page li {
+    margin-bottom: 10px;
+}
+
+/* 팝업 스타일 */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    border: 2px solid #6a0dad;
+}
+
+.popup.active {
+    display: block;
+}
+
+.popup h2 {
+    color: #ffcc00;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background-color: #1e1e1e;
+    padding: 10px 0;
+    z-index: 1;
+}
+
+.popup-content {
+    color: #f1f1f1;
+    line-height: 1.6;
+    position: relative;
+    z-index: 0;
+}
+
+.popup-close {
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(300px, -45vh);
+    background: #6a0dad;
+    border: 2px solid #8a2be2;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s;
+    padding: 0;
+    margin: 0;
+    z-index: 1001;
+    box-shadow: 0 0 10px rgba(106, 13, 173, 0.5);
+}
+
+.popup-close:hover {
+    background: #8a2be2;
+    border-color: #a64dff;
+    color: white;
+    transform: translate(300px, -45vh) scale(1.1);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.7);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+    display: none;
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* 반응형 디자인 추가 */
+@media (max-width: 850px) {
+    .game-container {
+        width: 100%;
+        height: 500px;
+    }
+}
+
+@media (max-width: 600px) {
+    .game-container {
+        height: 400px;
+    }
+    body {
+        padding-bottom: 50px;
+    }
+} 

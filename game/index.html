@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO 메타 태그 -->
+    <title>뱀파이어 서바이벌 - 무료 온라인 액션 생존 게임</title>
+    <meta name="description" content="무료로 즐기는 온라인 뱀파이어 서바이벌 게임! 적들을 피하고 레벨업하며 다양한 스킬을 획득하세요. 화려한 효과와 함께하는 액션 생존 게임입니다.">
+    <meta name="keywords" content="뱀파이어 서바이벌, 온라인 게임, 무료 게임, 액션 게임, 생존 게임, 웹게임, 브라우저 게임">
+    <meta name="author" content="Your Name">
+    
+    <!-- Open Graph 태그 -->
+    <meta property="og:title" content="뱀파이어 서바이벌 - 무료 온라인 액션 생존 게임">
+    <meta property="og:description" content="무료로 즐기는 온라인 뱀파이어 서바이벌 게임! 적들을 피하고 레벨업하며 다양한 스킬을 획득하세요.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-domain.com/vampire-survival">
+    <meta property="og:image" content="https://your-domain.com/images/game-preview.jpg">
+    
+    <!-- Twitter 카드 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="뱀파이어 서바이벌 - 무료 온라인 액션 생존 게임">
+    <meta name="twitter:description" content="무료로 즐기는 온라인 뱀파이어 서바이벌 게임! 적들을 피하고 레벨업하며 다양한 스킬을 획득하세요.">
+    <meta name="twitter:image" content="https://your-domain.com/images/game-preview.jpg">
+    
+    <!-- 캐노니컬 URL -->
+    <link rel="canonical" href="https://your-domain.com/vampire-survival">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- 구조화된 데이터 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "뱀파이어 서바이벌",
+        "description": "무료로 즐기는 온라인 뱀파이어 서바이벌 게임! 적들을 피하고 레벨업하며 다양한 스킬을 획득하세요.",
+        "genre": ["Action", "Survival"],
+        "gamePlatform": "Web Browser",
+        "applicationCategory": "Game",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "KRW",
+            "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "100"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- 메인 콘텐츠를 시맨틱 태그로 감싸기 -->
+    <main class="game-container">
+        <div id="menu-screen" class="screen active">
+            <h1>뱀파이어 서바이벌</h1>
+            <button id="start-button">게임 시작</button>
+            <article class="instructions">
+                <h2>게임 방법</h2>
+                <ul>
+                    <li>WASD 키로 이동하고 적들을 피하세요.</li>
+                    <li>자동으로 공격이 발사되며, 레벨이 올라갈수록 더 강력해집니다!</li>
+                    <li>적을 처치하면 경험치 구슬을 얻을 수 있습니다!</li>
+                    <li>오래 생존할수록 더 많은 점수를 얻습니다!</li>
+                </ul>
+            </article>
+        </div>
+        
+        <div id="game-screen" class="screen">
+            <header class="hud">
+                <div class="score">점수: <span id="score">0</span></div>
+                <div class="time">시간: <span id="time">0</span></div>
+                <div class="level">레벨: <span id="level">1</span></div>
+                <div class="health-bar">
+                    <div id="health-fill"></div>
+                </div>
+                <div class="exp-bar">
+                    <div id="exp-fill"></div>
+                </div>
+            </header>
+            <canvas id="game-canvas" aria-label="게임 화면" role="img"></canvas>
+        </div>
+        
+        <div id="level-up-screen" class="screen">
+            <h2>레벨 업!</h2>
+            <div class="skill-points">스킬 포인트: <span id="skill-points">1</span></div>
+            <section class="skill-selection">
+                <h3>스킬 선택</h3>
+                <div class="skill-buttons">
+                    <button class="skill-button" data-skill="attack">
+                        <span class="emoji">💥</span>
+                        <span class="name">공격력</span>
+                        <span class="level">Lv.1 → 2</span>
+                        <span class="effect">(15 → 20)</span>
+                    </button>
+                    <button class="skill-button" data-skill="speed">
+                        <span class="emoji">⚡</span>
+                        <span class="name">공격 속도</span>
+                        <span class="level">Lv.1 → 2</span>
+                        <span class="effect">(500ms → 400ms)</span>
+                    </button>
+                    <button class="skill-button" data-skill="projectiles">
+                        <span class="emoji">🔮</span>
+                        <span class="name">발사체 수</span>
+                        <span class="level">Lv.1 → 2</span>
+                        <span class="effect">(1 → 2)</span>
+                    </button>
+                    <button class="skill-button" data-skill="experience">
+                        <span class="emoji">🌟</span>
+                        <span class="name">경험치 획득</span>
+                        <span class="level">Lv.1 → 2</span>
+                        <span class="effect">(1.0x → 1.2x)</span>
+                    </button>
+                    <button class="skill-button" data-skill="health">
+                        <span class="emoji">❤️</span>
+                        <span class="name">체력 증가</span>
+                        <span class="level">Lv.1 → 2</span>
+                        <span class="effect">(100 → 120)</span>
+                    </button>
+                    <button class="skill-button" data-skill="magnet">
+                        <span class="emoji">🧲</span>
+                        <span class="name">자석 효과</span>
+                        <span class="level">Lv.1 → 2</span>
+                        <span class="effect">(100px → 150px)</span>
+                    </button>
+                </div>
+                <p class="skill-description">스킬을 선택하여 능력을 강화하세요</p>
+            </section>
+        </div>
+        
+        <div id="game-over-screen" class="screen">
+            <h2>게임 오버</h2>
+            <div class="final-score">최종 점수: <span id="final-score">0</span></div>
+            <button id="restart-button">다시 시작</button>
+        </div>
+    </main>
+    
+    <!-- 푸터 추가 -->
+    <footer>
+        <p>&copy; 2024 뱀파이어 서바이벌. All rights reserved.</p>
+        <nav>
+            <button id="instructions-btn" class="footer-btn">게임 방법</button> |
+            <button id="privacy-btn" class="footer-btn">개인정보처리방침</button> |
+            <button id="terms-btn" class="footer-btn">이용약관</button>
+        </nav>
+    </footer>
+    
+    <!-- 팝업 구조 추가 -->
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="popup" id="instructions-popup">
+        <h2>게임 방법</h2>
+        <div class="popup-content">
+            <ul>
+                <li>WASD 키로 이동하고 적들을 피하세요.</li>
+                <li>자동으로 공격이 발사되며, 레벨이 올라갈수록 더 강력해집니다!</li>
+                <li>적을 처치하면 경험치 구슬을 얻을 수 있습니다!</li>
+                <li>오래 생존할수록 더 많은 점수를 얻습니다!</li>
+            </ul>
+        </div>
+        <button class="popup-close" aria-label="닫기">×</button>
+    </div>
+
+    <div class="popup" id="privacy-popup">
+        <h2>개인정보처리방침</h2>
+        <div class="popup-content">
+            <p>이 게임은 어떠한 개인정보도 수집하지 않습니다.</p>
+        </div>
+        <button class="popup-close" aria-label="닫기">×</button>
+    </div>
+
+    <div class="popup" id="terms-popup">
+        <h2>이용약관</h2>
+        <div class="popup-content">
+            <p>이 게임은 무료로 제공되며, 어떠한 비용도 청구되지 않습니다.</p>
+        </div>
+        <button class="popup-close" aria-label="닫기">×</button>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html> 
